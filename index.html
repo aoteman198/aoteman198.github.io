@@ -16,7 +16,6 @@
             background: #000;
         }
 
-        /* ── full-bleed poster ── */
         .poster {
             position: fixed;
             inset: 0;
@@ -26,19 +25,30 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center top;
+            object-position: 30% center;
         }
-        /* no overlay — image speaks for itself */
 
-        /* ── bottom action bar ── */
-        .actions {
+        .brand {
+            position: fixed;
+            top: max(18px, env(safe-area-inset-top, 18px));
+            left: 22px;
+            z-index: 3;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.10em;
+            color: rgba(255,255,255,0.50);
+            text-transform: uppercase;
+        }
+
+        /* ── bottom bar ── */
+        .bar {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
             z-index: 3;
-            padding: 32px 16px calc(12px + env(safe-area-inset-bottom, 12px));
-            background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.55) 40%, rgba(0,0,0,0.85) 100%);
+            padding: 28px 20px max(14px, env(safe-area-inset-bottom, 14px));
+            background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.45) 35%, rgba(0,0,0,0.82) 100%);
             display: flex;
             flex-direction: column;
             gap: 9px;
@@ -49,77 +59,66 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
             width: 100%;
-            max-width: 360px;
-            padding: 16px 24px;
-            border-radius: 13px;
+            max-width: 340px;
+            padding: 15px 20px;
+            border-radius: 12px;
             text-decoration: none;
             font-size: 15px;
             font-weight: 600;
             letter-spacing: -0.01em;
-            transition: 0.16s ease;
-            -webkit-tap-highlight-color: transparent;
+            transition: all 0.18s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-
         .btn:active { transform: scale(0.97); }
 
-        .btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+        .btn svg { width: 20px; height: 20px; flex-shrink: 0; }
 
-        /* primary CTA */
-        .btn-primary {
+        /* primary — solid white, strong */
+        .btn-main {
             background: #fff;
             color: #000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.30);
         }
-        .btn-primary:active { background: #e6e6e6; }
+        .btn-main svg { opacity: 0.80; }
+        .btn-main:active { background: #e8e8e8; }
 
-        /* secondary */
-        .btn-ghost {
-            background: rgba(255,255,255,0.06);
-            color: #fff;
-            border: 1px solid rgba(255,255,255,0.20);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+        /* secondary — frosted glass */
+        .btn-sub {
+            background: rgba(255,255,255,0.07);
+            color: rgba(255,255,255,0.92);
+            border: 1px solid rgba(255,255,255,0.14);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
-        .btn-ghost:active { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.35); }
-
-        /* ── top brand ── */
-        .brand {
-            position: fixed;
-            top: calc(16px + env(safe-area-inset-top, 16px));
-            left: 20px;
-            z-index: 3;
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            color: rgba(255,255,255,0.6);
-            text-transform: uppercase;
+        .btn-sub svg { opacity: 0.55; }
+        .btn-sub:active {
+            background: rgba(255,255,255,0.13);
+            border-color: rgba(255,255,255,0.28);
         }
 
-        /* ── taller phones: bigger buttons ── */
+        /* ── sizing by screen ── */
         @media (min-height: 800px) {
-            .btn { padding: 18px 24px; font-size: 16px; border-radius: 14px; }
-            .actions { gap: 10px; padding-bottom: calc(20px + env(safe-area-inset-bottom, 20px)); }
+            .btn { padding: 17px 22px; font-size: 16px; border-radius: 13px; }
+            .bar { gap: 10px; padding-bottom: max(22px, env(safe-area-inset-bottom, 22px)); }
+            .btn svg { width: 22px; height: 22px; }
         }
-
-        /* ── very short screens ── */
-        @media (max-height: 600px) {
-            .btn { padding: 12px 20px; font-size: 14px; border-radius: 11px; }
-            .actions { gap: 7px; padding: 24px 12px calc(8px + env(safe-area-inset-bottom, 8px)); }
+        @media (max-height: 640px) {
+            .btn { padding: 12px 18px; font-size: 14px; border-radius: 10px; }
+            .bar { gap: 7px; padding: 20px 14px max(10px, env(safe-area-inset-bottom, 10px)); }
+            .btn svg { width: 17px; height: 17px; }
         }
 
     </style>
 </head>
 <body>
 
-    <div class="poster">
-        <img src="bg.jpg" alt="">
-    </div>
+    <div class="poster"><img src="bg.jpg" alt=""></div>
 
     <div class="brand">IDEXOR</div>
 
-    <div class="actions">
-        <a href="https://t.me/idexor" class="btn btn-primary">
+    <div class="bar">
+        <a href="https://t.me/idexor" class="btn btn-main">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M21.5 3.5L2.5 10.5L10.5 14.5L14.5 22.5L21.5 3.5Z"/>
                 <line x1="10.5" y1="14.5" x2="14.5" y2="9.5"/>
@@ -127,7 +126,7 @@
             Telegram
         </a>
 
-        <a href="https://wa.me/85296717301" class="btn btn-ghost">
+        <a href="https://wa.me/85296717301" class="btn btn-sub">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="10"/>
                 <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
@@ -137,9 +136,11 @@
             WhatsApp
         </a>
 
-        <a href="https://fyids.com/?ref=5858" class="btn btn-ghost">
+        <a href="https://fyids.com/?ref=5858" class="btn btn-sub">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/>
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <line x1="3" y1="9" x2="21" y2="9"/>
+                <line x1="9" y1="21" x2="9" y2="9"/>
             </svg>
             Store
         </a>
