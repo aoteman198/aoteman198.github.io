@@ -7,74 +7,59 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        html, body {
-            height: 100%;
+        body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             -webkit-font-smoothing: antialiased;
             -webkit-tap-highlight-color: transparent;
-            background: #000;
-            overflow: hidden;
+            background: #0a0a0b;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* image section — top 58% */
+        /* ── image section ── */
         .hero {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 42%;
-            z-index: 0;
+            flex: 0 0 auto;
+            background: #000;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
         }
         .hero img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: 15% center;
+            height: auto;
+            display: block;
         }
 
-        /* button section — bottom 42%, solid dark bg */
-        .dock {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            top: 58%;
-            z-index: 2;
-            background: #0d0d0f;
+        /* ── button section ── */
+        .actions {
+            flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 11px;
-            padding: 24px 20px max(20px, env(safe-area-inset-bottom, 20px));
+            gap: 12px;
+            padding: 28px 22px max(24px, env(safe-area-inset-bottom, 24px));
+            background: #0a0a0b;
         }
 
-        .brand-line {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 4px;
-        }
-        .brand-line .dot {
-            width: 5px; height: 5px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.5);
-        }
-        .brand-line span {
+        .brand-tag {
             font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.10em;
-            color: rgba(255,255,255,0.45);
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            color: rgba(255,255,255,0.30);
             text-transform: uppercase;
+            margin-bottom: 6px;
         }
 
+        /* ── each button ── */
         .btn {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 16px;
             width: 100%;
-            max-width: 340px;
-            padding: 16px 24px;
+            max-width: 360px;
+            padding: 15px 22px;
             border-radius: 14px;
             text-decoration: none;
             font-size: 15px;
@@ -84,74 +69,100 @@
         }
         .btn:active { transform: scale(0.975); }
 
-        .btn svg { width: 26px; height: 26px; flex-shrink: 0; }
+        .btn .icon {
+            width: 42px; height: 42px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn .icon svg { width: 22px; height: 22px; }
 
+        .btn .label {
+            flex: 1;
+        }
+        .btn .arrow {
+            opacity: 0.25;
+            font-size: 14px;
+        }
+
+        /* ── Telegram ── */
         .btn-tg {
-            background: #2AABEE;
+            background: #141417;
+            border: 1px solid #1e1e22;
             color: #fff;
         }
-        .btn-tg:active { background: #2098D6; }
+        .btn-tg .icon { background: #2AABEE; }
+        .btn-tg .icon svg { fill: #fff; }
+        .btn-tg:active { background: #1c1c20; }
 
+        /* ── WhatsApp ── */
         .btn-wa {
-            background: #1f1f23;
+            background: #141417;
+            border: 1px solid #1e1e22;
             color: #fff;
-            border: 1px solid #2a2a30;
         }
-        .btn-wa:active { background: #2a2a32; }
+        .btn-wa .icon { background: #25D366; }
+        .btn-wa .icon svg { fill: #fff; }
+        .btn-wa:active { background: #1c1c20; }
 
+        /* ── Store ── */
         .btn-store {
             background: transparent;
-            color: rgba(255,255,255,0.65);
-            border: 1px solid rgba(255,255,255,0.10);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: rgba(255,255,255,0.55);
         }
-        .btn-store:active { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.22); }
+        .btn-store .icon { background: rgba(255,255,255,0.06); }
+        .btn-store .icon svg { fill: none; stroke: rgba(255,255,255,0.45); stroke-width: 1.8; }
+        .btn-store:active { background: rgba(255,255,255,0.03); }
 
         @media (min-height: 800px) {
-            .hero { bottom: 40%; }
-            .dock { top: 60%; gap: 12px; }
-            .btn { padding: 18px 26px; font-size: 16px; border-radius: 15px; }
-            .btn svg { width: 28px; height: 28px; }
+            .actions { gap: 13px; padding-top: 36px; }
+            .btn { padding: 17px 24px; font-size: 16px; border-radius: 15px; }
         }
-        @media (max-height: 640px) {
-            .hero { bottom: 44%; }
-            .dock { top: 56%; gap: 8px; padding: 16px 16px max(14px, env(safe-area-inset-bottom, 14px)); }
-            .btn { padding: 13px 20px; font-size: 13px; border-radius: 11px; }
-            .btn svg { width: 22px; height: 22px; }
+        @media (max-height: 680px) {
+            .actions { gap: 8px; padding-top: 16px; }
+            .btn { padding: 12px 18px; font-size: 13px; border-radius: 11px; }
+            .btn .icon { width: 36px; height: 36px; }
+            .btn .icon svg { width: 18px; height: 18px; }
         }
 
     </style>
 </head>
 <body>
 
+    <!-- full-width image, no cropping -->
     <div class="hero">
-        <img src="bg.jpg" alt="">
+        <img src="bg.jpg?v=3" alt="">
     </div>
 
-    <div class="dock">
-        <div class="brand-line">
-            <div class="dot"></div>
-            <span>IDEXOR</span>
-        </div>
+    <!-- buttons -->
+    <div class="actions">
+        <div class="brand-tag">IDEXOR</div>
 
         <a href="https://t.me/idexor" class="btn btn-tg">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.563 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.46-1.901-.903-1.056-.692-1.653-1.123-2.678-1.799-1.185-.781-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.481-.428-.01-1.252-.242-1.865-.441-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.014 3.333-1.386 4.025-1.627 4.477-1.635.099-.002.321.023.465.14.12.098.153.228.169.32.016.12.036.39.02.533z"/>
-            </svg>
-            Telegram
+            <span class="icon">
+                <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.46-1.901-.903-1.056-.692-1.653-1.123-2.678-1.799-1.185-.781-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.481-.428-.009-1.252-.242-1.865-.441-.752-.244-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.014 3.333-1.386 4.025-1.627 4.477-1.635.099-.002.321.023.465.14.121.098.153.228.169.32.016.12.036.39.02.533z"/></svg>
+            </span>
+            <span class="label">Telegram</span>
+            <span class="arrow">&#8594;</span>
         </a>
 
         <a href="https://wa.me/85296717301" class="btn btn-wa">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
-            </svg>
-            WhatsApp
+            <span class="icon">
+                <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+            </span>
+            <span class="label">WhatsApp</span>
+            <span class="arrow">&#8594;</span>
         </a>
 
         <a href="https://fyids.com/?ref=5858" class="btn btn-store">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-            </svg>
-            Visit Store
+            <span class="icon">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </span>
+            <span class="label">Visit Store</span>
+            <span class="arrow">&#8594;</span>
         </a>
     </div>
 
