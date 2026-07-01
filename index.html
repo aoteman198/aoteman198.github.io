@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0f0f0f;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+        .card {
+            background: #1a1a1a;
+            padding: 48px 40px;
+            border-radius: 16px;
+            max-width: 400px;
+            width: 90%;
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        p.sub {
+            color: #999;
+            font-size: 14px;
+            margin-bottom: 36px;
+        }
+        .btn {
+            display: block;
+            text-decoration: none;
+            color: #fff;
+            background: #2a2a2a;
+            padding: 16px 24px;
+            border-radius: 12px;
+            margin-bottom: 14px;
+            font-size: 18px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        .btn:hover { background: #3a3a3a; }
+        .btn.telegram { background: #2AABEE; }
+        .btn.telegram:hover { background: #2299D5; }
+        .btn.whatsapp { background: #25D366; }
+        .btn.whatsapp:hover { background: #1FB855; }
+        .btn.website { background: #555; }
+        .emoji { font-size: 24px; margin-right: 8px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>📞 Contact Us</h1>
+        <p class="sub">Choose your preferred way to reach us</p>
+
+        <a href="https://t.me/idexor" class="btn telegram">
+            <span class="emoji">✈️</span> Telegram
+        </a>
+
+        <a href="https://wa.me/85296717301" class="btn whatsapp">
+            <span class="emoji">💬</span> WhatsApp
+        </a>
+
+        <a href="https://fyids.com/?ref=5858" class="btn website">
+            <span class="emoji">🏠</span> Back to Store
+        </a>
+    </div>
+</body>
+</html>
